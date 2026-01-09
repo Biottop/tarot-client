@@ -4,6 +4,7 @@ import OpponentHand from "./OpponentHand";
 import { Dog } from "./Dog";
 import BiddingPanel from "./BiddingPanel";
 import CallKingPanel from "./CallKingPanel";
+import DiscardPanel from "./DiscardPanel";
 
 export default function Table({
   players, 
