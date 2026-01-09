@@ -19,7 +19,7 @@ export function Dog({revealed, cards}) {
               style={{
                 width: "min(12vw, 110px)",
                 aspectRatio: "3/5",
-                objectFit: "coutain"
+                objectFit: "contain"
               }}
             />
           ))}
