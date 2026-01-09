@@ -23,7 +23,7 @@ export default function CallKingPanel({ onCallKing }) {
             <div
                 style={{
                     backgroundColor: "#222",
-                    pdding: "20px 30px",
+                    padding: "20px 30px",
                     borderRadius: "8px",
                     color: "white",
                     minWidth: "300px",
