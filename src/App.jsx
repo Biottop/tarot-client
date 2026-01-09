@@ -10,6 +10,7 @@ export default function App() {
   const [players, setPlayers] = useState([]);
   const [phase, setPhase] = useState("bidding");
   const [chienCards, setChienCards] = useState([]);
+  const [discardCards, setDiscardCards] = useState([]);
 
   useEffect(() => {
     console.log("Connexion WebSocket…");
@@ -48,6 +49,16 @@ export default function App() {
         console.log("Chien révélé :", msg.cards);
         setChienCards(msg.cards);
         setPhase("chien_revealed");
+        // Après 5 secondes on passe à l'écart
+        setTimeout(() => {
+          console.log("Fin de la révélation du chien on passe à l'écart");
+          // TODO: setPhase("discard");
+          // TODO: informer le server de l'écart
+        }, 5000);
+      }
+      if (msg.type === "start_discard") {
+        console.log("Début de l'écart pour le preneur");
+        setPhase("discard");
       }
       if (msg.type === "chien_hidden") {
         console.log("Chien caché :", msg.owner);
@@ -79,6 +90,30 @@ export default function App() {
     }));
   }
 
+  function handleToggleDiscard(card) {
+    setDiscardCards((prev) => {
+      const idx = prev.findIndex(
+        (c) => c.suit === card.suit && c.value === card.value
+      );
+      if (idx === 1) {
+        return [...prev, card];
+      } else {
+        // retirer une carte
+        const copy = [...prev];
+        copy.splice(idx, 1);
+        return copy;
+      }
+    });
+  }
+
+  function handleValidateDiscard() {
+    console.log("Ecart validé :", discardCards);
+    socket.send(JSON.stringify({
+      type: "discard_done",
+      cards: discardCards,
+    }));
+  }
+
   return (
     <div className = "app-root">
       <Table 
@@ -86,8 +121,11 @@ export default function App() {
         myCards = {hand}
         phase = {phase}
         onBid = {handleBid}
-        chienCards={chienCards}
-        onCallKing={handleCallKing}
+        chienCards = {chienCards}
+        onCallKing = {handleCallKing}
+        discardCards = {discardCards}
+        onToggleDiscard = {handleToggleDiscard}
+        onValidateDiscard = {handleValidateDiscard}
       />
       { hand.length === 0 && (
         <div style = {{ position: "fixed", top: 20, left: 20}}>

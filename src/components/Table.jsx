@@ -5,7 +5,17 @@ import { Dog } from "./Dog";
 import BiddingPanel from "./BiddingPanel";
 import CallKingPanel from "./CallKingPanel";
 
-export default function Table({ players, myCards, phase, onBid, chienCards, onCallKing }) {
+export default function Table({
+  players, 
+  myCards, 
+  phase, 
+  onBid, 
+  chienCards, 
+  onCallKing,
+  discardCards,
+  onToggleDiscard,
+  onValidateDiscard,
+}) {
   const count = players.length;
 
   return (
@@ -16,6 +26,15 @@ export default function Table({ players, myCards, phase, onBid, chienCards, onCa
 
       {count === 5 && phase === "call_king" && (
         <CallKingPanel onCallKing={onCallKing} />
+      )}
+
+      {phase === "discard" && (
+        <DiscardPanel
+          hand = {myCards}
+          discardCards = {discardCards}
+          onToggleDiscard = {onToggleDiscard}
+          onValidateDiscard = {onValidateDiscard}
+        />
       )}
 
       {/* Zone centrale */}
