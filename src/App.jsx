@@ -67,6 +67,14 @@ export default function App() {
       bid
     }));
   }
+
+  function handleCallKing(suit) {
+    socket.send(JSON.stringify({
+      type: "call_king", 
+      suit
+    }));
+  }
+
   return (
     <div className = "app-root">
       <Table 
@@ -75,6 +83,7 @@ export default function App() {
         phase = {phase}
         onBid = {handleBid}
         chienCards={chienCards}
+        onCallKing={handleCallKing}
       />
       { hand.length === 0 && (
         <div style = {{ position: "fixed", top: 20, left: 20}}>

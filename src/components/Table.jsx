@@ -3,14 +3,19 @@ import Hand from "./Hand";
 import OpponentHand from "./OpponentHand";
 import { Dog } from "./Dog";
 import BiddingPanel from "./BiddingPanel";
+import CallKingPanel from "./CallKingPanel";
 
-export default function Table({ players, myCards, phase, onBid, chienCards }) {
+export default function Table({ players, myCards, phase, onBid, chienCards, onCallKing }) {
   const count = players.length;
 
   return (
     <div className="table">
       {(phase === "bidding" || phase === "chien_hidden") && (
         <BiddingPanel onBid={onBid} />
+      )}
+
+      {count === 5 && phase === "call_king" && (
+        <CallKingPanel onCallKing={onCallKing} />
       )}
 
       {/* Zone centrale */}
