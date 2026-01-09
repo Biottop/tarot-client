@@ -40,6 +40,10 @@ export default function App() {
         // On fait le chien
         console.log("Enchères terminée, en attente du chien");
       }
+      if (msg.type === "call_king") {
+        console.log("Phase appel du roi !");
+        setPhase("call_king");
+      }
       if (msg.type === "chien_revealed") {
         console.log("Chien révélé :", msg.cards);
         setChienCards(msg.cards);
