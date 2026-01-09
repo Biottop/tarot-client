@@ -1,4 +1,5 @@
 // client/src/components/Dog.jsx
+import { getCardImage } from "../utils/cardImages";
 export function Dog({revealed, cards}) {
   return (
     <div
@@ -14,7 +15,7 @@ export function Dog({revealed, cards}) {
           {cards.map((c, i) => (
             <img
               key={i}
-              src={`/assets/cards/${c.suit}_${c.value}.png`}
+              src={getCardImage(c.suit, c.value)}
               style={{
                 width: "min(12vw, 110px)",
                 aspectRatio: "3/5",

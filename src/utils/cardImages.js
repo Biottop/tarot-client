@@ -1,3 +1,4 @@
+// client/src/utils/cardImages.js
 export function getCardImage(suit, value) {
   // Normaliser la famille en minuscule
   const s = suit.toLowerCase();

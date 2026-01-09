@@ -9,7 +9,7 @@ export default function Table({ players, myCards, phase, onBid, chienCards }) {
 
   return (
     <div className="table">
-      {phase === "bidding" && (
+      {(phase === "bidding" || phase === "chien_hidden") && (
         <BiddingPanel onBid={onBid} />
       )}
 
