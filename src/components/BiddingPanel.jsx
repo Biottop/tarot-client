@@ -14,7 +14,7 @@ export default function BiddingPanel( { onBid } ) {
             style={{
                 position: "fixed",
                 inset: 0,
-                backgroungColor: "rgba(0, 0, 0, 0.6)",
+                backgroungColor: "rgba(0, 0, 0, 0.75)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -36,8 +36,8 @@ export default function BiddingPanel( { onBid } ) {
                 <div
                     style={{
                         marginTop: "15px",
-                        display: "flex",
-                        flexDirection: "column",
+                        display: "grid",
+                        gridTemplateColumns: "lfr lfr",
                         gap: "10px",
                     }}
                 >
