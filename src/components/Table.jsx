@@ -15,19 +15,16 @@ export default function Table({ players, myCards, phase, onBid, chienCards }) {
 
       {/* Zone centrale */}
       <div className="table-center">
-        {phase === "chien_revealed" && (
-          <Dog revealed={true} cards={chienCards} />
-        )}
-        {phase === "chien_hidden" && (
-          <Dog revealed={false} />
-        )}
-        {/* plus tard : <Trick /> pour le pli */}
+        <Dog 
+          revealed={phase === "chien_revealed"} 
+          cards={chienCards} 
+        />
       </div>
 
-      {/* Ta main en bas, inchangée */}
+      {/* Ta main en bas */}
       <Hand cards={myCards} />
 
-      {/* Adversaires / avatars comme avant */}
+      {/* Adversaires */}
       {count === 3 && (
         <>
           <OpponentHand position="top-left" />
