@@ -37,7 +37,7 @@ export default function BiddingPanel( { onBid } ) {
                     style={{
                         marginTop: "15px",
                         display: "grid",
-                        gridTemplateColumns: "lfr lfr",
+                        gridTemplateColumns: "1fr 1fr",
                         gap: "10px",
                     }}
                 >
