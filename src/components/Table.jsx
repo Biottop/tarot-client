@@ -1,9 +1,10 @@
+// client/src/components/Table.jsx
 import Hand from "./Hand";
 import OpponentHand from "./OpponentHand";
 import { Dog } from "./Dog";
 import BiddingPanel from "./BiddingPanel";
 
-export default function Table({ players, myCards, phase, onBid }) {
+export default function Table({ players, myCards, phase, onBid, chienCards }) {
   const count = players.length;
 
   return (
@@ -14,7 +15,12 @@ export default function Table({ players, myCards, phase, onBid }) {
 
       {/* Zone centrale */}
       <div className="table-center">
-        <Dog />
+        {phase === "chien_revealed" && (
+          <Dog revealed={true} cards={chienCards} />
+        )}
+        {phase === "chien_hidden" && (
+          <Dog revealed={false} />
+        )}
         {/* plus tard : <Trick /> pour le pli */}
       </div>
 

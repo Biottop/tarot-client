@@ -1,3 +1,4 @@
+// client/src/App.jsx
 import { useEffect, useState } from "react";
 import { socket } from "./ws/socket";
 import "./App.css";
@@ -8,6 +9,7 @@ export default function App() {
   const [hand, setHand] = useState([]);
   const [players, setPlayers] = useState([]);
   const [phase, setPhase] = useState("bidding");
+  const [chienCards, setChienCards] = useState([]);
 
   useEffect(() => {
     console.log("Connexion WebSocket…");
@@ -35,7 +37,17 @@ export default function App() {
       }
       if (msg.status === "bidding_finished") {
         console.log("Enchères terminées ! Preneur :", msg.preneur);
-        setPhase("playing");
+        // On fait le chien
+        console.log("Enchères terminée, en attente du chien");
+      }
+      if (msg.type === "chien_revealed") {
+        console.log("Chien révélé :", msg.cards);
+        setChienCards(msg.cards);
+        setPhase("chien_revealed");
+      }
+      if (msg.type === "chien_hidden") {
+        console.log("Chien caché :", msg.owner);
+        setPhase("chien_hidden");
       }
     };
 
@@ -57,7 +69,13 @@ export default function App() {
   }
   return (
     <div className = "app-root">
-      <Table players = {players} myCards = {hand} phase = {phase} onBid = {handleBid} />
+      <Table 
+        players = {players}
+        myCards = {hand}
+        phase = {phase}
+        onBid = {handleBid}
+        chienCards={chienCards}
+      />
       { hand.length === 0 && (
         <div style = {{ position: "fixed", top: 20, left: 20}}>
           <p> Aucune carte reçue </p>

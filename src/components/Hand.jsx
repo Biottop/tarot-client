@@ -1,3 +1,4 @@
+// client/src/components/Hand.jsx
 import Card from "./Card";
 
 export default function Hand({ cards }) {
